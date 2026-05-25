@@ -1,0 +1,77 @@
+{% set name = "arviz-stats" %}
+{% set version = "1.1.0" %}
+
+package:
+  name: arviz-stats-suite
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/arviz_stats-{{ version }}.tar.gz
+  sha256: c0111d36007bbed8286afe01089738229e2b9bf8df9d4a0e4b107f2e3f71e6c7
+
+build:
+  number: 0
+  skip: true  # [py<312]
+
+outputs:
+  - name: arviz-stats-core
+    build:
+      skip: true  # [py<312]
+      script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    requirements:
+      host:
+        - python
+        - flit-core >=3.4,<4
+        - pip
+      run:
+        - python
+        - numpy >=2
+        - scipy >=1.13
+    test:
+      imports:
+        - arviz_stats
+      commands:
+        - pip check
+      requires:
+        - pip
+
+  - name: arviz-stats
+    build:
+      skip: true  # [py<312]
+      script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    requirements:
+      host:
+        - python
+        - flit-core >=3.4,<4
+        - pip
+      run:
+        - python
+        - {{ pin_subpackage('arviz-stats-core', exact=True) }}
+        - arviz-base >=1.1.0,<1.2.0
+        - xarray-einstats
+        - xarray >=2024.11.0
+    test:
+      imports:
+        - arviz_stats
+      commands:
+        - pip check
+      requires:
+        - pip
+
+about:
+  home: https://python.arviz.org
+  summary: Statistical computation and diagnostics for ArviZ.
+  description: |
+    arviz-stats provides statistical computation and diagnostics for the ArviZ
+    ecosystem, building on arviz-base and xarray.
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  doc_url: https://python.arviz.org/projects/stats/
+  dev_url: https://github.com/arviz-devs/arviz-stats
+
+extra:
+  recipe-maintainers:
+    - OriolAbril
+    - aloctavodia
+    - tomicapretto
