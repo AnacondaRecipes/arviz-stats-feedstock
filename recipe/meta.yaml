@@ -13,9 +13,14 @@ build:
   number: 0
   skip: true  # [py<312]
 
+requirements:
+  host:
+    - python
+
 outputs:
   - name: arviz-stats-core
-    script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    build:
+      script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     requirements:
       host:
         - python
@@ -34,7 +39,8 @@ outputs:
         - pip
 
   - name: arviz-stats
-    script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    build:
+      script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     requirements:
       host:
         - python
