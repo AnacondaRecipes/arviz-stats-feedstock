@@ -2,7 +2,7 @@
 {% set version = "1.1.0" %}
 
 package:
-  name: arviz-stats-suite
+  name: {{ name }}-suite
   version: {{ version }}
 
 source:
