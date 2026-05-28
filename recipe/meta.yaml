@@ -69,7 +69,7 @@ about:
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
-  doc_url: https://python.arviz.org/projects/stats/
+  doc_url: https://python.arviz.org/projects/stats
   dev_url: https://github.com/arviz-devs/arviz-stats
 
 extra:
