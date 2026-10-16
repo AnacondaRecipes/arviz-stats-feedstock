@@ -1,5 +1,5 @@
 {% set name = "arviz-stats" %}
-{% set version = "1.1.0" %}
+{% set version = "1.3.3" %}
 
 package:
   name: {{ name }}-suite
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: c0111d36007bbed8286afe01089738229e2b9bf8df9d4a0e4b107f2e3f71e6c7
+  sha256: 3fed50cc2a9bb8e2719fd675691b1c332c15394e13d4b7a2bef64f6a6c2a6ccf
 
 build:
   number: 0
@@ -49,7 +49,7 @@ outputs:
       run:
         - python
         - {{ pin_subpackage('arviz-stats-core', exact=True) }}
-        - arviz-base >=1.1.0,<1.2.0
+        - arviz-base >=1.3.1,<1.4.0
         - xarray-einstats
         - xarray >=2024.11.0
     test:
