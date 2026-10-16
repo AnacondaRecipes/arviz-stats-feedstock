@@ -19,8 +19,7 @@ requirements:
 
 outputs:
   - name: arviz-stats-core
-    build:
-      script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     requirements:
       host:
         - python
@@ -39,8 +38,7 @@ outputs:
         - pip
 
   - name: arviz-stats
-    build:
-      script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     requirements:
       host:
         - python
