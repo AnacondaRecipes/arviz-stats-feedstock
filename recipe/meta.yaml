@@ -6,8 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: 3fed50cc2a9bb8e2719fd675691b1c332c15394e13d4b7a2bef64f6a6c2a6ccf
+  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
+    sha256: 3fed50cc2a9bb8e2719fd675691b1c332c15394e13d4b7a2bef64f6a6c2a6ccf
+  # upstream tests are not shipped in the PyPI sdist; fetch them from the tag
+  - url: https://github.com/arviz-devs/arviz-stats/archive/refs/tags/v{{ version }}.tar.gz
+    sha256: 99afa6279f945d91fa71e5b2189621f83c45208b7c290d5d838f5abe522c2644
 
 build:
   number: 0
@@ -33,10 +36,14 @@ outputs:
     test:
       imports:
         - arviz_stats
+      source_files:
+        - tests
       commands:
         - pip check
+        - pytest -vv tests
       requires:
         - pip
+        - pytest
 
   - name: arviz-stats
     build:
